@@ -33,8 +33,6 @@ public class MoveValuesWithAnnotationsTest {
                 .putValuesTo(outputObject)
                 .moveAll();
 
-        System.out.println(outputObject);
-
         assertEquals(inputObject.getId(), outputObject.getId());
         assertEquals(inputObject.getLevel(), outputObject.getLevel());
         assertEquals(inputObject.getDescription(), outputObject.getDescription());
@@ -47,8 +45,6 @@ public class MoveValuesWithAnnotationsTest {
                 .takeValuesFrom(inputObject)
                 .putValuesTo(outputObject)
                 .moveExcept("description");
-
-        System.out.println(outputObject);
 
         assertEquals(inputObject.getId(), outputObject.getId());
         assertEquals(inputObject.getLevel(), outputObject.getLevel());

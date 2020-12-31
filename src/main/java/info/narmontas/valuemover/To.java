@@ -3,9 +3,7 @@ package info.narmontas.valuemover;
 import info.narmontas.valuemover.annotations.IgnoreValue;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class To<T> {
 
@@ -39,10 +37,23 @@ public class To<T> {
 
     // processor:
     private void process() {
-        Field[] declaredFields = type.getDeclaredFields();
+        List<Field> declaredFields = getAllDeclaredFields();
         for (Field field : declaredFields) {
             checkIfAnnotated(field);
             assignAll(field);
+        }
+    }
+
+    private List<Field> getAllDeclaredFields() {
+        List<Field> fields = new ArrayList<>();
+        assignFieldsRecursively(type, fields);
+        return fields;
+    }
+
+    private void assignFieldsRecursively(Class<?> type, List<Field> fields) {
+        fields.addAll(Arrays.asList(type.getDeclaredFields()));
+        if (type.getSuperclass() != null && !type.getSuperclass().getName().equals("Object")) {
+            assignFieldsRecursively(type.getSuperclass(), fields);
         }
     }
 
