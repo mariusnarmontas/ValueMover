@@ -1,6 +1,6 @@
 package info.narmontas.valuemover;
 
-import info.narmontas.valuemover.annotations.IgnoreValue;
+import info.narmontas.valuemover.annotation.IgnoreValue;
 
 import java.lang.reflect.Field;
 import java.util.*;

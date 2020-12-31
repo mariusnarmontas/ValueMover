@@ -1,4 +1,4 @@
-package info.narmontas.valuemover.annotations;
+package info.narmontas.valuemover.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
