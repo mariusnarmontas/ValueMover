@@ -1,5 +1,7 @@
 package info.narmontas.valuemover;
 
+import info.narmontas.valuemover.annotations.IgnoreValue;
+
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -39,10 +41,21 @@ public class To<T> {
     private void process() {
         Field[] declaredFields = type.getDeclaredFields();
         for (Field field : declaredFields) {
-            if (!exceptions.contains(field.getName())) {
-                field.setAccessible(true);
-                assign(field);
-            }
+            checkIfAnnotated(field);
+            assignAll(field);
+        }
+    }
+
+    private void checkIfAnnotated(Field field) {
+        if (field.isAnnotationPresent(IgnoreValue.class)) {
+            exceptions.add(field.getName());
+        }
+    }
+
+    private void assignAll(Field field) {
+        if (!exceptions.contains(field.getName())) {
+            field.setAccessible(true);
+            assign(field);
         }
     }
 

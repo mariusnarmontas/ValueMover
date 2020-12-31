@@ -1,62 +1,58 @@
 package info.narmontas.valuemover;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static info.narmontas.valuemover.MoveValues.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-class MoveValuesTest {
+public class MoveValuesWithAnnotationsTest {
 
-    private static TestType inputObject;
-    private TestType outputObject;
+    private static AnnotatedTestType inputObject;
+    private AnnotatedTestType outputObject;
 
     @BeforeAll
     public static void init() {
-        inputObject = new TestType();
+        inputObject = new AnnotatedTestType();
         inputObject.setId(11L);
-        inputObject.setName("Test Object");
         inputObject.setLevel(1);
-        inputObject.setChildrenNames(new ArrayList<>());
-        inputObject.getChildrenNames().add("Children 1");
-        inputObject.getChildrenNames().add("Children 2");
+        inputObject.setDescription("Test Description");
+        inputObject.setIgnoredField("Ignored Field");
     }
 
     @BeforeEach
     public void createOutputObject() {
-        outputObject = new TestType();
+        outputObject = new AnnotatedTestType();
     }
 
     @Test
     public void moveAll() {
-        forType(TestType.class)
+        forType(AnnotatedTestType.class)
                 .takeValuesFrom(inputObject)
                 .putValuesTo(outputObject)
                 .moveAll();
 
+        System.out.println(outputObject);
+
         assertEquals(inputObject.getId(), outputObject.getId());
-        assertEquals(inputObject.getName(), outputObject.getName());
         assertEquals(inputObject.getLevel(), outputObject.getLevel());
-        assertEquals(inputObject.getChildrenNames(), outputObject.getChildrenNames());
+        assertEquals(inputObject.getDescription(), outputObject.getDescription());
+        assertNull(outputObject.getIgnoredField());
     }
 
     @Test
     public void moveExcept() {
-        System.out.println(outputObject);
-
-        forType(TestType.class)
+        forType(AnnotatedTestType.class)
                 .takeValuesFrom(inputObject)
                 .putValuesTo(outputObject)
-                .moveExcept("childrenNames");
+                .moveExcept("description");
 
         System.out.println(outputObject);
 
         assertEquals(inputObject.getId(), outputObject.getId());
-        assertEquals(inputObject.getName(), outputObject.getName());
         assertEquals(inputObject.getLevel(), outputObject.getLevel());
-        assertNull(outputObject.getChildrenNames());
+        assertNull(outputObject.getDescription());
+        assertNull(outputObject.getIgnoredField());
     }
 }
