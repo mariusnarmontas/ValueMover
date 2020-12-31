@@ -9,7 +9,7 @@ public class From<T> {
         this.moveValues = moveValues;
     }
 
-    public To<T> pubValuesTo(T outputObject) {
+    public To<T> putValuesTo(T outputObject) {
         this.outputObject = outputObject;
         return new To<T>(this);
     }

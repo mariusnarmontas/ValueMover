@@ -36,7 +36,7 @@ class MoveValuesTest {
 
         forType(TestType.class)
                 .takeValuesFrom(inputObject)
-                .pubValuesTo(outputObject)
+                .putValuesTo(outputObject)
                 .moveAll();
 
         System.out.println(outputObject);
@@ -53,7 +53,7 @@ class MoveValuesTest {
 
         forType(TestType.class)
                 .takeValuesFrom(inputObject)
-                .pubValuesTo(outputObject)
+                .putValuesTo(outputObject)
                 .moveExcept("childrenNames");
 
         System.out.println(outputObject);
