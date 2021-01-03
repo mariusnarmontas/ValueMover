@@ -4,6 +4,7 @@ public class MoveValues<T> {
 
     private final Class<T> type;
     private T inputObject;
+    private Boolean moveParentValues = true;
 
     private MoveValues(Class<T> type) {
         this.type = type;
@@ -18,11 +19,20 @@ public class MoveValues<T> {
         return new From<T>(this);
     }
 
+    public MoveValues<T> flat() {
+        moveParentValues = false;
+        return this;
+    }
+
     Class<T> getType() {
         return type;
     }
 
     T getInputObject() {
         return inputObject;
+    }
+
+    public Boolean getMoveParentValues() {
+        return moveParentValues;
     }
 }

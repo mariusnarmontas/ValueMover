@@ -11,11 +11,13 @@ public class To<T> {
     private final Class<T> type;
     private final T inputObject;
     private final T outputObject;
+    private final Boolean getParentValues;
 
     To(From<T> from) {
         this.type = from.getMoveValues().getType();
         this.inputObject = from.getMoveValues().getInputObject();
         this.outputObject = from.getOutputObject();
+        this.getParentValues = from.getMoveValues().getMoveParentValues();
     }
 
     /**
@@ -52,7 +54,8 @@ public class To<T> {
 
     private void assignFieldsRecursively(Class<?> type, List<Field> fields) {
         fields.addAll(Arrays.asList(type.getDeclaredFields()));
-        if (type.getSuperclass() != null && !type.getSuperclass().getName().equals("Object")) {
+        if (type.getSuperclass() != null && !type.getSuperclass().getName().equals("Object")
+                && getParentValues) {
             assignFieldsRecursively(type.getSuperclass(), fields);
         }
     }
@@ -80,7 +83,7 @@ public class To<T> {
         try {
             value = field.get(inputObject);
         } catch (IllegalAccessException e) {
-            System.out.println("Error: cannot get value from "
+            System.out.println("Error: cannot get value of "
                     + field.getName());
             e.printStackTrace();
         }

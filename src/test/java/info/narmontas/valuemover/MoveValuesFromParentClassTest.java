@@ -36,4 +36,17 @@ public class MoveValuesFromParentClassTest {
         assertEquals(inputObject.getDescription(), outputObject.getDescription());
         assertEquals(inputObject.getLevel(), outputObject.getLevel());
     }
+
+    @Test
+    public void moveAll_flat() {
+        forType(ChildrenType.class).flat()
+                .takeValuesFrom(inputObject)
+                .putValuesTo(outputObject)
+                .moveAll();
+
+        assertNotEquals(inputObject.getId(), outputObject.getId());
+        assertNotEquals(inputObject.getName(), outputObject.getName());
+        assertEquals(inputObject.getDescription(), outputObject.getDescription());
+        assertEquals(inputObject.getLevel(), outputObject.getLevel());
+    }
 }
