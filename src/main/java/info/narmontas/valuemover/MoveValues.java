@@ -29,7 +29,7 @@ public class MoveValues<T> {
         return type;
     }
 
-    public void setMoveParentValues(Boolean moveParentValues) {
+    void setMoveParentValues(Boolean moveParentValues) {
         this.moveParentValues = moveParentValues;
     }
 
@@ -37,7 +37,7 @@ public class MoveValues<T> {
         return inputObject;
     }
 
-    public Boolean getMoveParentValues() {
+    Boolean getMoveParentValues() {
         return moveParentValues;
     }
 }
