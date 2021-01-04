@@ -39,7 +39,7 @@ public class MoveValuesFromParentClassTest {
 
     @Test
     public void moveAll_flat() {
-        forType(ChildrenType.class).flat()
+        forFlatType(ChildrenType.class)
                 .takeValuesFrom(inputObject)
                 .putValuesTo(outputObject)
                 .moveAll();

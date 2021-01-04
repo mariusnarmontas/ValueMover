@@ -33,10 +33,9 @@ personService.save(fetchedObject);
 In the example above all parameters' values (parent objects included) will be copied from `receivedObject` 
 to `fetchedObject`.
 
-If values from parent object should be ignored, then `flat()` method should be invoked:
+If values from parent object should be ignored, then `forFlatType(Class<?> type)` method should be invoked:
 ```java
-MoveValues.forType(Person.class)
-    .flat()
+MoveValues.forFlatType(Person.class)
     .takeValuesFrom(receivedObject)
     .putValuesTo(fetchedObject)
     .moveAll();

@@ -14,18 +14,23 @@ public class MoveValues<T> {
         return new MoveValues<T>(clazz);
     }
 
+    public static <T> MoveValues<T> forFlatType(Class<T> clazz) {
+        MoveValues<T> mv = new MoveValues<T>(clazz);
+        mv.setMoveParentValues(false);
+        return mv;
+    }
+
     public From<T> takeValuesFrom(T inputObject) {
         this.inputObject = inputObject;
         return new From<T>(this);
     }
 
-    public MoveValues<T> flat() {
-        moveParentValues = false;
-        return this;
-    }
-
     Class<T> getType() {
         return type;
+    }
+
+    public void setMoveParentValues(Boolean moveParentValues) {
+        this.moveParentValues = moveParentValues;
     }
 
     T getInputObject() {
