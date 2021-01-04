@@ -5,7 +5,7 @@ This library simply copies parameters' values from one object to another object 
 For example, on JPA entity update:
 ```java
 Person fetchedObject = personService.findById(id);
-Person receivedObjec = deserializePostRequestBody(requestBody);
+Person receivedObject = deserializePostRequestBody(requestBody);
 ```
 *instead of doing this:*
 ```java
